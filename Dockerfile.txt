@@ -1,0 +1,104 @@
+# Multi-stage build for Vengeance Bot
+FROM alpine:3.18 as builder
+
+# Install build dependencies
+RUN apk add --no-cache \
+    gcc \
+    musl-dev \
+    python3-dev \
+    py3-pip \
+    libffi-dev \
+    openssl-dev \
+    cargo \
+    build-base \
+    linux-headers \
+    tcpdump \
+    libpcap-dev \
+    nmap \
+    whois \
+    bind-tools \
+    nikto \
+    crunch \
+    git
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements first for better caching
+COPY requirements.txt .
+COPY requirements-dev.txt .
+
+# Install Python dependencies
+RUN pip3 install --no-cache-dir --upgrade pip && \
+    pip3 install --no-cache-dir -r requirements.txt && \
+    pip3 install --no-cache-dir gunicorn==21.2.0
+
+# Final stage
+FROM alpine:3.18
+
+# Install runtime dependencies
+RUN apk add --no-cache \
+    python3 \
+    py3-pip \
+    tcpdump \
+    nmap \
+    whois \
+    bind-tools \
+    nikto \
+    crunch \
+    openssh-client \
+    openssh-server \
+    sudo \
+    curl \
+    wget \
+    ca-certificates \
+    bash \
+    zsh \
+    tmux \
+    vim \
+    net-tools \
+    netcat-openbsd \
+    iputils \
+    iptables \
+    arp-scan \
+    htop \
+    procps \
+    && rm -rf /var/cache/apk/*
+
+# Create non-root user
+RUN addgroup -g 1000 vengeance && \
+    adduser -D -u 1000 -G vengeance vengeance && \
+    echo "vengeance ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+
+# Create directories
+RUN mkdir -p /app/.vengeance /app/reports /app/logs /app/data && \
+    chown -R vengeance:vengeance /app
+
+# Copy application
+COPY --from=builder /usr/lib/python3.11/site-packages /usr/lib/python3.11/site-packages
+COPY --from=builder /usr/bin /usr/bin
+COPY . /app
+
+# Set working directory
+WORKDIR /app
+
+# Change ownership
+RUN chown -R vengeance:vengeance /app
+
+# Switch to non-root user
+USER vengeance
+
+# Expose ports
+EXPOSE 5000 8080 8081 9090
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+    CMD python3 healthcheck.py || exit 1
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PATH="/usr/local/bin:/usr/bin:/bin"
+
+# Entry point
+ENTRYPOINT ["python3", "vengeance.py"]

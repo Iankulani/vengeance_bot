@@ -1,0 +1,41 @@
+{
+  "dashboard": {
+    "title": "Vengeance Bot Monitoring",
+    "description": "Real-time monitoring dashboard for Vengeance Bot",
+    "tags": ["security", "monitoring", "vengeance"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "Command Execution Rate",
+        "type": "graph",
+        "targets": [
+          {
+            "expr": "rate(vengeance_commands_total[5m])",
+            "legendFormat": "Commands/sec"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+      },
+      {
+        "title": "Active Threats",
+        "type": "stat",
+        "targets": [
+          {
+            "expr": "vengeance_threats_total"
+          }
+        ],
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0}
+      },
+      {
+        "title": "System CPU Usage",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "100 - (avg(rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)"
+          }
+        ],
+        "gridPos": {"h": 8, "w": 6, "x": 18, "y": 0}
+      }
+    ]
+  }
+}
