@@ -2,6 +2,7 @@
 
 <img width="568" height="568" alt="venge" src="https://github.com/user-attachments/assets/31121126-d39a-4825-a88b-50bb5feacf09" />
 
+
 [![GitHub stars](https://img.shields.io/github/stars/Iankulani/vengeance_bot?style=for-the-badge&logo=github)](https://github.com/Iankulani/vengeance_bot/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/Iankulani/vengeance_bot?style=for-the-badge&logo=github)](https://github.com/Iankulani/vengeance_bot/network)
 [![GitHub watchers](https://img.shields.io/github/watchers/Iankulani/vengeance_bot?style=for-the-badge&logo=github)](https://github.com/Iankulani/vengeance_bot/watchers)
@@ -25,17 +26,18 @@ Web Application Layer – Inject XSS-driven social engineering popups, clone OAu
 
 Dark Web Integration – Pivot through Tor to stage simulated data leak boards, fake ransomware negotiation portals, or monitor threat actor chatter. Vengeance_Bot can deploy isolated .onion landing pages to test how security teams respond to dark exposure events.
 
-Social Engineering & Reconnaissance
+# Social Engineering & Reconnaissance
+
 The bot’s Social Engineering Suite automates pretext generation, malicious QR codes, voice phishing (vishing) scripts, and typosquatting URL variants. Campaigns support A/B testing, geofencing, and time-to-action metrics. For students, a sandbox mode replays real-world breach scenarios without live targeting.
 
 Built for Learning & Defensive Validation
 Cybersecurity students gain hands-on access to:
 
-Step-by-step attack replays
+* Step-by-step attack replays
 
-Detection logic analysis (SIGMA, YARA)
+* Detection logic analysis (SIGMA, YARA)
 
-Log correlation exercises against SIEM outputs
+* Log correlation exercises against SIEM outputs
 
 
 # How to clone the repo
