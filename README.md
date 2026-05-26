@@ -13,7 +13,7 @@
 [![Python](https://img.shields.io/badge/python-3.x-blue?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 
 
-Vengeance_Bot is a next-generation, modular command-and-control (C2) framework designed for authorized penetration testing, controlled social engineering exercises, and adversarial simulation across modern communication ecosystems. Built for ethical hackers, red team operators, cybersecurity students, and certified defenders, Vengeance_Bot bridges the gap between theoretical exploits and real-world execution—all within a legal, consent-based testing environment.
+Vengeance Bot is a next-generation, modular command-and-control (C2) framework designed for authorized penetration testing, controlled social engineering exercises, and adversarial simulation across modern communication ecosystems. Built for ethical hackers, red team operators, cybersecurity students, and certified defenders, Vengeance_Bot bridges the gap between theoretical exploits and real-world execution—all within a legal, consent-based testing environment.
 
 Multi-Vector Exploitation & Delivery
 Vengeance_Bot enables security professionals to simulate sophisticated attacks across Telegram, Slack, iMessage, web applications, and dark web channels via Tor hidden services. Each module is isolated, auditable, and fully instrumented for after-action reporting.
